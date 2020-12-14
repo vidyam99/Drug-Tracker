@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LYProject</title>
+</head>
+<body>
+	<h1>Welcome to Medicinal Product Tracking Blockchain System</h1>
+	<a href="{{ url_for('login_page') }}"><button>Login</button></a>
+	<a href="{{ url_for('signup_page')  }}"><button>Signup</button></a>
+	<br>
+	<br>
+	<a href="{{ url_for('home_product_info') }}"><button>Get Product Info</button></a>
+	<a href="{{ url_for('home_supply_chain_info') }}"><button>Get Supply Chain Info</button></a>
+	{% if value==2 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<input type="submit" value="Get Product Info">
+		</form>
+
+	{% endif %}
+
+	{% if value==3 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<input type="submit" value="Get Supply Chain Info">
+		</form>
+
+	{% endif %}
+</body>
+</html>

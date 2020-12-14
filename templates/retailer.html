@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LYProject</title>
+</head>
+<body>
+	<h1>Welcome Retailer</h1>
+	<h2>Hey {{data['name']}}</h2>
+	<h2>Email: {{data['emailid']}}   Mobile No.: {{data['mobile']}}</h2>
+	<h2>Your Public Address: {{data['address']}}</h2>
+	<a href="{{ url_for('retailer_buy') }}"><button>Buy Product</button></a>
+	<a href="{{ url_for('retailer_receive') }}"><button>Receive Product</button></a>
+	<a href="{{ url_for('retailer_sell') }}"><button>Sell Product</button></a>
+	{% if value==1 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<label>Pay Price: (in ETH)</label>
+			<input type="text" name="price" id="price">
+			<label>Location: </label>
+			<input type="text" name="location" id="location">
+			<input type="submit" name="buy" value="Buy Product">
+		</form>
+
+	{% endif %}
+
+	{% if value==2 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<label>Location: </label>
+			<input type="text" name="location" id="location">
+			<input type="submit" name="receive" value="Receive Product">
+		</form>
+
+	{% endif %}
+
+	{% if value==3 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<label>Location: </label>
+			<input type="text" name="location" id="location">
+			<input type="submit" name="sell" value="Sell Product">
+		</form>
+
+	{% endif %}
+
+</body>
+</html>

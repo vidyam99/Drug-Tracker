@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LYProject</title>
+</head>
+<body>
+	<h1>Welcome Manufacturer</h1>
+	<h2>Hey {{data['name']}}</h2>
+	<h2>Email: {{data['emailid']}}   Mobile No.: {{data['mobile']}}</h2>
+	<h2>Your Public Address: {{data['address']}}</h2>
+	<a href="{{ url_for('manufacturer_add') }}"><button>Add Product</button></a>
+	<a href="{{ url_for('manufacturer_package') }}"><button>Package Product</button></a>
+	<a href="{{ url_for('manufacturer_sell') }}"><button>Sell Product</button></a>
+	<a href="{{ url_for('manufacturer_ship') }}"><button>Ship Product</button></a>
+	{% if value==1 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<label>Product Type: </label>
+			<input type="text" name="itemType" id="itemType">
+			<label>Product Name: </label>
+			<input type="text" name="itemName" id="itemName">
+			<label>Product Notes: </label>
+			<input type="text" name="productNotes" id="productNotes">
+			<label>Product Price: </label>
+			<input type="text" name="productPrice" id="productPrice">
+			<label>Location: </label>
+			<input type="text" name="location" id="location">
+			<input type="submit" name="add" value="Add Product">
+		</form>
+
+	{% endif %}
+
+	{% if value==2 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<label>Location: </label>
+			<input type="text" name="location" id="location">
+			<input type="submit" name="package" value="Package Product">
+		</form>
+
+	{% endif %}
+
+	{% if value==3 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<label>Location: </label>
+			<input type="text" name="location" id="location">
+			<input type="submit" name="sell" value="Sell Product">
+		</form>
+
+	{% endif %}
+
+	{% if value==4 %}
+
+		<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc">
+			<label>Location: </label>
+			<input type="text" name="location" id="location">
+			<input type="submit" name="ship" value="Ship Product">
+		</form>
+
+	{% endif %}
+
+</body>
+</html>
