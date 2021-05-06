@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% set active_page = "index" %}
+{% block content %}
+
+	<p class="lead text-center">Welcome to D.O.T. - Drug Origin Tracker</p>
+	<br>
+	<br>
+	<!-- <a href="{{ url_for('login_page') }}"><button>Login</button></a>
+	<a href="{{ url_for('signup_page')  }}"><button>Signup</button></a>
+	<br>
+	<br> -->
+	<div class='container'>
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-sm">
+	<div class="d-flex justify-content-right">
+	<a href="{{ url_for('home_product_info') }}"><button class="btn btn-primary align-middle">Get Product Info</button></a>
+</div>
+<br>
+<br>
+<p></p>
+<div class="d-flex justify-content-right align-middle">
+	<a href="{{ url_for('home_supply_chain_info') }}"><button class="btn btn-primary">Get Supply Chain Info</button></a>
+</div>
+
+
+
+	<!-- Forms for getting information -->
+	
+	{% if value %}
+
+	<div>
+	<div class="container">
+		<div class="d-flex justify-content-left align-middle"></div>
+	<form method="post">
+		<br>
+		<br>
+		{% if value==2 %}
+			<p class="lead text-left"> Product Info </p>
+		{% endif %}
+		{% if value==3 %}
+			<p class="lead text-left"> Supply Chain Info </p>
+		{% endif %}
+		<br>
+		<div class="form-group row">
+    <div class="col-sm-7">
+    <input type="number" name="upc" class="form-control" id="upc" placeholder="ProductID">
+    </div>
+		<br>
+		<br>
+		<div class="container">
+		{% if value==2 %}
+		<div class="d-flex justify-content-left align-middle">
+			<button type="submit" value="Get Product Info" class="btn btn-primary"> Get Info</button>
+		</div>
+		{% endif %}
+		{% if value==3 %}
+		<div class="d-flex justify-content-left align-middle">
+			<a><button type="submit" value="Get Supply Chain Info" class="btn btn-primary">Get Info</button></a>
+		</div>
+		{% endif %}
+			</div>
+</form>
+</div>
+</div>
+</div>
+	{% endif %}
+</div>
+<br>
+	<div class="col-sm">
+		<img src="{{url_for('static',filename='/images/medicine_illustration.svg')}}" class="img-fluid" alt="Medicines">
+	</div>
+	<br>
+		</div>
+	</div>
+	<!-- Product Information -->
+
+	{% if productitems %}
+
+		{% if value==2 %}
+			<h5 class="text-center">Product information :</h5>
+		</br>
+		<div class='table-responsive center'>
+	
+	<!-- Product Information -->
+<div>
+
+	<table class="table table-hover table-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+			<th scope="col">Value</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+		  <tr>
+			<th scope="row">ManufacturerID</th>
+			<td>{{row[1]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Name</th>
+			<td>{{row[2]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Price</th>
+			<td>{{row[3]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">State</th>
+			<td>{{row[4]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">DistributorID</th>
+			<td>{{row[5]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">RetailerID</th>
+			<td>{{row[6]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">ConsumerID</th>
+			<td>{{row[7]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Quantity</th>
+			<td>{{row[8]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">ExpiryNumber</th>
+			<td>{{row[9]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">BatchNumber</th>
+			<td>{{row[10]}}</td>
+		  </tr>
+		</tr>  
+			{% endfor %}  
+		</tbody>
+	  </table>
+	{% endif %}
+		{% if value==3 %}
+			<p class='text-center'>Product Supply Chain Information:</p>
+	<table id="desktoptable" class="table table-hover table-bordered text-center table-sm">
+		<thead>
+			<tr>
+			<th scope="col">TimeStamp</th>
+			<th scope="col">State</th>
+			<th scope="col">TransactionBy</th>
+			<th scope="col">Price</th>
+			<th scope="col">Location</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+			<tr>
+			<td>{{row[0]}}</td>
+			<td>{{states[row[1]]}}</td>
+			<td>{{row[2]}}</td>
+		  	<td>{{row[3]}}</td>
+			<td>{{row[4]}}</td>
+			</tr>
+			{% endfor %}  
+		</tbody>
+	  </table>
+
+	  <br>
+
+	  <table id="smalltable" class="table table-striped stable-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+		  <tr>
+		  	<td>
+		  	<p class="text-center">
+		  	<br>TimeStamp :
+		  	<br>{{row[0]}}
+			<br>State :
+			<br>{{states[row[1]]}}
+			<br>TransactionBy : {{row[2]}}
+			<br>Price : 
+			<br>{{row[3]}}
+		 	<br>Location :
+		 	<br>{{row[4]}}
+		 	<b>
+		 </p></td>
+		  </tr> 
+		  <br>
+			{% endfor %}  
+		</tbody>
+	  </table>
+
+
+	  {% endif %}
+{% else %}
+<p class="lead text-center"></p>
+{% endif %}
+</div>
+
+</div>
+{% endblock %}

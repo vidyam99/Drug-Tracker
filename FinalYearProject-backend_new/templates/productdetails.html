@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<!-- Forms for getting information -->
+
+	<div>
+
+
+	<div class='table-responsive center'>
+
+	<h4 class='text-center text-primary'>Product Data</h4>
+		<table class="table table-hover table-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+			<th scope="col">Value</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+		  	<th scope="row">Approval Date</th>
+			<td>{{approvaldata['Date']}}</td>
+		</tr>
+		<tr>
+			<th scope="row">Drug Name</th>
+			<td>{{approvaldata['Name']}}</td>
+			</tr>
+			<tr>
+			<th scope="row">Indication</th>
+			<td>{{approvaldata['Indication']}}</td>
+		  </tr> 
+		</tbody>
+	  </table>
+	
+	<!-- Product Information -->
+	<br>
+    <h4 class='text-center text-primary'> Product Overview</h4>
+<div>
+
+	<table class="table table-hover table-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+			<th scope="col">Value</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+		  <tr>
+			<th scope="row">ProductID</th>
+			<td>{{row[0]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">ManufacturerID</th>
+			<td>{{row[1]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">ItemName</th>
+			<td>{{row[2]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Price</th>
+			<td>{{row[3]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">itemState</th>
+			<td>{{row[4]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">distributorID</th>
+			<td>{{row[5]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">retailerID</th>
+			<td>{{row[6]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">consumerID</th>
+			<td>{{row[7]}}</td>
+		  </tr><tr>
+			<th scope="row">Quantity</th>
+			<td>{{row[8]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">expiryDate</th>
+			<td>{{row[9]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Batch Number</th>
+			<td>{{row[10]}}</td>
+		  </tr>
+		</tr>  
+			{% endfor %}  
+		</tbody>
+	  </table>
+	</div>
+<!-- 	<div class="d-flex justify-content-around"><a href="{{currentlink}}1" class="btn bg-light btn-lg active rounded border border-primary" role="button" aria-pressed="true">SupplyChain</a></div> -->
+		<h4 class='text-center text-primary'> Product Supply Chain Information</h4>
+		<table id="desktoptable" class="table table-hover table-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">TimeStamp</th>
+			<th scope="col">State</th>
+			<th scope="col">TransactionBy</th>
+			<th scope="col">Price</th>
+			<th scope="col">Location</th>
+			<th scope="col">Quantity</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for row in productsupplyitems %}  
+		  <tr>
+			<td>{{row[0]}}</td>
+			<td>{{row[1]}}</td>
+			<td>{{row[2]}}</td>
+		  	<td>{{row[3]}}</td>
+			<td>{{row[4]}}</td>
+			<td>{{row[5]}}</td>
+		  </tr> 
+			{% endfor %}  
+		</tbody>
+	  </table>
+
+	  <table id="smalltable" class="table table-striped stable-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+		  <tr>
+		  	<td>
+		  	<p class="text-center">
+		  	<br>TimeStamp :
+		  	<br>{{row[0]}}
+			<br>State :
+			<br>{{states[row[1]]}}
+			<br>TransactionBy : {{row[2]}}
+			<br>Price : 
+			<br>{{row[3]}}
+		 	<br>Location :
+		 	<br>{{row[4]}}
+		 	<br>Quantity :
+		 	<br>{{row[5]}}
+		 	<b>
+		 </p></td>
+		  </tr> 
+		  <br>
+			{% endfor %}  
+		</tbody>
+	  </table>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block content %}
+	<p class="lead text-center">Hey {{data['name']}}</p>
+	<p class="lead text-center">Email: {{data['emailid']}}</p>
+	<p class="lead text-center">Mobile No.: {{data['mobile']}}</p>
+	<p class="lead text-center">Your Public Address: {{data['address']}}</p>
+	<div class="d-flex justify-content-around">
+	<a href="{{ url_for('manufacturer_add') }}"><button class="btn btn-primary">Add</button></a>
+	<a href="{{ url_for('manufacturer_sell') }}"><button class="btn btn-primary">Sell</button></a>
+  <a href="{{ url_for('manufacturer_ship') }}"><button class="btn btn-primary">Ship</button></a>
+  <a href="{{ url_for('download_qrcode') }}"><button class="btn btn-primary">QRCode</button></a>
+  
+</div>
+	<br>
+  <br>
+  {% if value %}
+<!-- 	<form method="post">
+			<label>Product ID: </label>
+			<input type="number" name="upc" id="upc"><br>
+			<label>Location: </label>
+			<input type="text" name="location" id="location"><br>
+			{% if value==1 %}
+				<label>Product Type: </label>
+				<input type="text" name="itemType" id="itemType"><br>
+				<label>Product Name: </label>
+		<select name="itemName" autocomplete='on'>
+			{% for row in options %}  
+				 <option value="{{row}}">{{row}}</option>
+			{% endfor %}
+		</select>
+				<input type="text" name="itemName" id="itemName"><br>
+				<label>Product Notes: </label>
+				<input type="text" name="productNotes" id="productNotes"><br>
+				<label>Product Price: </label>
+				<input type="text" name="productPrice" id="productPrice"><br>
+				<input type="submit" name="add" value="Add">
+			{% endif %}
+			< value 2 was packaging that has been integrated now with adding products
+			{% if value==3 %}
+				<input type="submit" name="sell" value="Sell">
+			{% endif %}
+			{% if value==4 %}
+				<input type="submit" name="ship" value="Ship">
+			{% endif %}
+	</form> -->
+	<form method="post">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Product ID</label>
+    <div class="col-sm-10">
+    <input type="number" name="upc" class="form-control" id="upc" placeholder="ProductID">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Location</label>
+    <div class="col-sm-10">
+    <input type="text" name="location" class="form-control" id="location" placeholder="Location">
+    </div>
+  </div>
+  {% if value==1 %}
+     <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Quantity</label>
+    <div class="col-sm-10">
+    <input type="number" name="productQuantity" class="form-control" id="productQuantity" placeholder="ProductQuantity">
+    </div>
+</div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Product Type</label>
+    <div class="col-sm-10">
+    <input type="text" name="itemType" class="form-control" id="itemType" placeholder="ProductType">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="exampleFormControlSelect1">Product Name</label>
+    <div class="col-sm-10">
+    <select name="itemName" autocomplete="on" class="form-control">
+      <option selected disabled>Choose</option>
+		{% for row in options %}  
+				 <option value="{{row}}">{{row}}</option>
+			{% endfor %}
+    </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Product Notes</label>
+    <div class="col-sm-10">
+    <input type="text" name="productNotes" class="form-control" id="productNotes" placeholder="Notes">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Product Price</label>
+    <div class="col-sm-10">
+    <input type="number" name="productPrice" class="form-control" id="productPrice" placeholder="ProductPrice">
+    </div>
+  </div>
+   <div class="form-group row">
+  <label class="col-sm-2 col-form-label">Expiry Date</label>
+    <div class="col-sm-10">
+    <input class="form-control" name="productExpiryDate" type="date" id="ProductExpiryDate">
+  </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Batch Number</label>
+    <div class="col-sm-10">
+    <input type="text" name="productBatch" class="form-control" id="productBatch" placeholder="ProductBatch">
+    </div>
+</div>
+  <div class="d-flex justify-content-around">
+    <button type="submit" name="add" value="Add" class="btn btn-primary">Add</button>
+  </div>
+  {% endif %}
+  {% if value==3 %}
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Quantity</label>
+    <div class="col-sm-10">
+    <input type="number" name="productQuantity" class="form-control" id="productQuantity" placeholder="ProductQuantity">
+    </div>
+</div>
+  <div class="d-flex justify-content-around">
+				<button type="submit" name="sell" value="Sell" class="btn btn-primary">Sell</button>
+	</div>
+	{% endif %}
+	{% if value==4 %}
+	<div class="d-flex justify-content-around">
+		<button type="submit" name="ship" value="ship" class="btn btn-primary">Ship</button>
+	</div>
+  {% endif %}
+  <br>
+  <br>
+</form>
+  {% endif %}
+{% endblock %}

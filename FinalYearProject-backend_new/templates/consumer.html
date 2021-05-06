@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block content %}
+	<p class="lead text-center">Hey {{data['name']}}</p>
+	<p class="lead text-center">Email: {{data['emailid']}}</p>
+	<p class="lead text-center">Mobile No.: {{data['mobile']}}</p>
+	<p class="lead text-center useraddress">Your Public Address: {{data['address']}}</p>
+<div class="d-flex justify-content-around">
+	<a href="{{ url_for('consumer_buy') }}"><button class="btn btn-primary">Buy Product</button></a>
+	<a href="{{ url_for('product_info') }}"><button class="btn btn-primary">Product Info</button></a>
+	<a href="{{ url_for('supply_chain_info') }}"><button class="btn btn-primary">Supplychain</button></a>
+	<a href="{{ url_for('download_qrcode') }}"><button class="btn btn-primary">Get QRCode</button></a>	
+</div>
+	<br>
+	<br>
+	{% if value %}
+	<form method="post">
+		<div class="form-group row">
+	    <label class="col-sm-2 col-form-label">Product ID</label>
+	    <div class="col-sm-10">
+	    <input type="number" name="upc" class="form-control" id="upc" placeholder="ProductID">
+	    </div>
+	  </div>
+			{% if value==1 %}
+					  <div class="form-group row">
+					    <label class="col-sm-2 col-form-label">Product Price</label>
+					    <div class="col-sm-10">
+					    <input type="number" name="price" class="form-control" id="price" placeholder="ProductPrice">
+					    </div>
+					  </div>
+					<div class="form-group row">
+				    <label class="col-sm-2 col-form-label">Location</label>
+				    <div class="col-sm-10">
+				    <input type="text" name="location" class="form-control" id="location" placeholder="Location">
+				    </div>
+				  </div>
+				     <div class="form-group row">
+					    <label class="col-sm-2 col-form-label">Quantity</label>
+					    <div class="col-sm-10">
+					    <input type="number" name="productQuantity" class="form-control" id="productQuantity" placeholder="ProductQuantity">
+					    </div>
+				</div>
+				  <div class="d-flex justify-content-around">
+					<input type="submit" name="buy" value="Buy Product">
+				</div>
+			{% endif %}
+			{% if value==2 %}
+			<div class="d-flex justify-content-around">
+					<input type="submit" value="Get Product Info">
+			</div>
+			{% endif %}
+			{% if value==3 %}
+			<div class="d-flex justify-content-around">
+					<input type="submit" value="Get Supply Chain Info">
+			</div>
+			{% endif %}
+	{% endif %}
+	<br><br>
+	{% if productitems %}
+			{% if value==1 %}
+				<h4>Available products to buy:</h4>
+			{% endif %}
+			{% if value==2 %}
+				<h4>Product details</h4>
+			{% endif %}
+			{% if value==3 %}
+				<h4>Supply Chain Information</h4>
+			{% endif %}
+			</br>
+			{% if value==2 %}
+			<h5 class="text-center">Product information :</h5>
+		</br>
+		<div class='table-responsive center'>
+	
+	<!-- Product Information -->
+<div>
+
+	<table class="table table-hover table-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+			<th scope="col">Value</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+		  <tr>
+			<th scope="row">ManufacturerID</th>
+			<td>{{row[1]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Name</th>
+			<td>{{row[2]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Price</th>
+			<td>{{row[3]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">State</th>
+			<td>{{row[4]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">DistributorID</th>
+			<td>{{row[5]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">RetailerID</th>
+			<td>{{row[6]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">ConsumerID</th>
+			<td>{{row[7]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">Quantity</th>
+			<td>{{row[8]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">ExpiryNumber</th>
+			<td>{{row[9]}}</td>
+		  </tr>
+		  <tr>
+			<th scope="row">BatchNumber</th>
+			<td>{{row[10]}}</td>
+		  </tr>
+		</tr>  
+			{% endfor %}  
+		</tbody>
+	  </table>
+
+	  {% endif %}
+	  {% if value==3 %}
+			<p class='text-center'>Product Supply Chain Information:</p>
+	<table id="desktoptable" class="table table-hover table-bordered text-center table-sm">
+		<thead>
+			<tr>
+			<th scope="col">TimeStamp</th>
+			<th scope="col">State</th>
+			<th scope="col">TransactionBy</th>
+			<th scope="col">Price</th>
+			<th scope="col">Location</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+			<tr>
+			<td>{{row[0]}}</td>
+			<td>{{states[row[1]]}}</td>
+			<td>{{row[2]}}</td>
+		  	<td>{{row[3]}}</td>
+			<td>{{row[4]}}</td>
+			</tr>
+			{% endfor %}  
+		</tbody>
+	  </table>
+
+	  <br>
+
+	  <table id="smalltable" class="table table-striped stable-bordered text-center table-sm">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+		  </tr>
+		</thead>
+		<tbody>
+		{% for row in productitems %}  
+		  <tr>
+		  	<td>
+		  	<p class="text-center">
+		  	<br>TimeStamp :
+		  	<br>{{row[0]}}
+			<br>State :
+			<br>{{states[row[1]]}}
+			<br>TransactionBy : {{row[2]}}
+			<br>Price : 
+			<br>{{row[3]}}
+		 	<br>Location :
+		 	<br>{{row[4]}}
+		 	<b>
+		 </p></td>
+		  </tr> 
+		  <br>
+			{% endfor %}  
+		</tbody>
+	  </table>
+	  {% endif %}
+		<br><br> 
+
+	{% endif %}
+{% endblock %}
